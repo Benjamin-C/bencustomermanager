@@ -1,0 +1,59 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Test Page</title>
+    <script>
+      window.onload = function() {
+        // setupAuth();
+        setupSearch();
+        setupHeader();
+      }
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="lib.js"></script>
+    <script type="text/javascript" src="auth.js"></script>
+    <script type="text/javascript" src="search.js"></script>
+    <script type="text/javascript" src="results.js"></script>
+    <script type="text/javascript" src="new.js"></script>
+    <script type="text/javascript" src="view.js"></script>
+    <style>
+    button {
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 4px 4px;
+      text-align: center;
+      text-decoration: none;
+      margin: 4px 4px;
+    }
+    .smallbutton {
+      margin: 0px 0px;
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .fake {
+
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 560px;
+      box-sizing: content-box;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      padding: 12px 16px;
+      z-index: 1;
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    </style>
+  </head>
+  <body>
+    <div id="headerzone"></div>
+    <div id="topdatazone"></div>
+    <div id="bottomdatazone"></div>
+  </body>
+</html>

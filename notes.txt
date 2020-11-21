@@ -1,0 +1,88 @@
+IMPORTANT TODO:
+ - node.js: Sanatize all inputs to db
+ - node.js: Switch to HTTPS
+ - All other .js: Switch to HTTPS
+ - node.js: Sanatize auth request
+
+LESS IMPORTANT TODO:
+ - node.js: Log console to file
+ - node.js: Log all db changes to changes table
+
+TODO:
+ - results.js: Fix table is NULL
+
+Future:
+ - Change sorting methods
+
+MySQL cheat sheet:
+ - CREATE TABLE table (columname1 TYPE, columname2 TYPE2);
+ - INSERT INTO table (columname1,columname2) VALUES ('value1','value2');
+ - SELECT <columname1,columname2|*> FROM table [WHERE columname1 = 'value1'];
+ - SELECT <columname1,columname2|*> FROM table [WHERE columname1 IS NULL];
+ - ALTER TABLE table ADD COLUMN columname3 TYPE3;
+ - ALTER TABLE table DROP COLUMN columname3;
+ - UPDATE table SET columname2='value2',columname3='value3' WHERE columname1 LIKE 'value1';
+
+Ranks: (not implemented)
+ 0 - No Rank
+ 1 - User
+ 2 - Manager
+
+Right now to add table:
+ - search.js: search type
+ - new.js: new type
+ - node.js: post > new > create uuid
+
+create table people(
+  uuid binary(16),
+  uuid_str varchar(36) generated always as (insert(insert(insert(insert(hex(uuid),9,0,'-'),14,0,'-'),19,0,'-'),24,0,'-')) virtual,
+  name varchar(64));
+
+insert into people (uuid,name) values(unhex(replace(uuid(),'-','')), 'firstname lastname');
+
+select name from people where uuid = unhex('hexstring');
+
+ALTER TABLE people ADD COLUMN name type;
+
+UPDATE people SET pet_name = 'bobby dog' WHERE uuid = unhex('A9D2DFB2291611EB82B5002B67427015');
+
+To get UUID from string:
+unhex(replace(uuid(),'-',''))
+
+To get a list of columns:
+SHOW COLUMNS FROM people;
+
+Data lengths:
+https://stackoverflow.com/questions/20958/list-of-standard-lengths-for-database-fields
+
+ALTER TABLE people MODIFY COLUMN uuid_str varchar(36) generated always as (
+  insert(insert(insert(insert(hex(uuid_bin),9,0,'-'),14,0,'-'),19,0,'-'),24,0,'-')) virtual;
+
+type: [add|remove|edit]
+location: table name
+id: id of changed element
+field: field name changed
+from: old value
+timestamp: when the change was made
+CREATE TABLE changes(
+changeid INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+type VARCHAR(64),
+location VARCHAR(64),
+id VARCHAR(64),
+field VARCHAR(64),
+old VARCHAR(4096),
+timestamp TIMESTAMP
+);
+
+INSERT INTO changes (type,location,id,field,old,timestamp) VALUES ('init','nowhere','0','nofield','',NOW());
+
+CREATE TABLE orders(
+id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+puuid VARCHAR(36) GENERATED ALWAYS AS (insert(insert(insert(insert(hex(puuid_bin),9,0,'-'),14,0,'-'),19,0,'-'),24,0,'-')) VIRTUAL,
+puuid_bin BINARY(16),
+date DATE,
+time VARCHAR(32),
+notes VARCHAR(512)
+);
+
+INSERT INTO orders (puuid_bin,date,time,notes) VALUES (unhex(replace(uuid(),'-','')), '2222-2-22', 'morning', 'orange car');
