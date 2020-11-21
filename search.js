@@ -16,8 +16,6 @@ function setupSearch() {
   h += "<input id=\"namebox\", type=\"text\" value=\"\"></input><br/>";
   h += "<input id=\"exactmatch\", type=\"checkbox\">Exact Match</id>";
   h += "<button onclick=\"search_requestSearch()\">Search</button><br/>";
-  // h += "<button onClick=\"alert('hi');\">New Person</button>";
-  // h += "<button onclick=\"alert('hi2')\">e</button>";
   h += "<button onClick=\"setupNewPerson('people', 'topdatazone')\">New Person</button>";
   document.getElementById("topdatazone").innerHTML = h;
   search_onSelect();
