@@ -15,8 +15,8 @@ function setupResultPage(rst) {
     }
     document.getElementById("topdatazone").innerHTML = h;
     table = document.getElementById('data');
-    if(table === undefined) {
-      alert("Table was undefined");
+    if(table === undefined || table === null) {
+      alert("Table was undefined/null" + msg);
     } else {
       uuidcol = 0;
       while(table.rows[0].cells[uuidcol].textContent != "uuid" && uuidcol < table.rows[0].cells.length) {

@@ -327,7 +327,10 @@ http.createServer(function (req, res) {
       case "view": {
         if(isDBConnected) {
           // if(!(args.uuid === undefined)) {
-          if(defined(args.table, args.key, args.value, args.fields)) {
+          if(defined(args.table, args.key, args.value)) {
+            if(!defined(args.fields)) {
+              args.fields = "*";
+            }
             // Possibly should replace 'like' with '=' if thing try to get too slow when 'like' is not needed
             let query = "SELECT " + args.fields + " FROM " + args.table + " WHERE " + args.key + " LIKE '" + args.value + "';";
             console.log(query);
