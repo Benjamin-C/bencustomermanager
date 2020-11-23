@@ -7,16 +7,16 @@ function setupHeader() {
 function removeHeader() {
   document.getElementById("headerzone").innerHTML = "";
 }
-function asyncSubmitForm(e, sucess){
-  if(sucess === undefined) {
-    sucess = function(d) { alert(d); }
+function asyncSubmitForm(e, success){
+  if(success === undefined) {
+    success = function(d) { alert(d); }
   }
   e.preventDefault();
   $.ajax({
     url: 'db',
     type: 'post',
     data: $('#' + e.target.id).serialize(),
-    success: sucess
+    success: success
   });
 }
 
