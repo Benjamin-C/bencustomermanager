@@ -1,43 +1,30 @@
 let rsp = "";
 
 function setupResultPage(rst) {
-  rsp = rst;
+  rsp = JSON.parse(rst);
   let h = "";
-
-  var parser = new DOMParser();
-  var doc = parser.parseFromString(rst, 'text/html');
-  if(rst.startsWith("<div id=\"command\">")) {
-    var rsptable = doc.getElementById('data'); // table.rows[i].cells[0].textContent
-    if(rsptable.rows[0].cells[0].textContent == "null") {
-      h += "No results";
-    } else {
-      h += doc.getElementById("response").innerHTML;
-    }
-    document.getElementById("topdatazone").innerHTML = h;
-    table = document.getElementById('data');
-    if(table === undefined || table === null) {
-      alert("Table was undefined/null" + msg);
-    } else {
-      uuidcol = 0;
-      while(table.rows[0].cells[uuidcol].textContent != "uuid" && uuidcol < table.rows[0].cells.length) {
-        uuidcol++;
-      }
-      if(uuidcol != 0 && table.rows[0].cells[0].textContent != "null") {
-        alert("Response was in the wrong order");
-      }
-      if(uuidcol < 0 || uuidcol >= table.rows[0].cells.length) {
-        alert("No UUId sent");
-        uuidcol = 0;
-      }
-      if(table.rows[0].cells[uuidcol].textContent == "uuid") { // Fix if table is null
-        table.rows[0].cells[uuidcol].textContent = "";
-        for(let i = 1; i < table.rows.length; i++) {
-          let uuid = table.rows[i].cells[uuidcol].textContent;
-          table.rows[i].cells[uuidcol].innerHTML = "<button class=\"smallbutton\" onclick=\"setupView('" + uuid + "')\">V</button>";
+  result = rsp.result;
+  if(result.length == 0) {
+    h += "No results";
+  } else {
+    let t = "";
+    let n = "";
+    for(let i = 0; i < result.length; i++) {
+      t += "<tr>";
+      n += (i==0) ? "<tr><td></td>" : "";
+      t += "<td style=\"border:1px solid black;\"><button class=\"smallbutton\" onclick=\"setupView('" + result[i].uuid + "')\">V</button></td>";
+      for (let [key, value] of Object.entries(result[i])) {
+        if(`${key}` != "uuid") {
+          t += "<td style=\"border:1px solid black;\">" + `${value}` + "</td>";
+          if(i == 0) {
+            n += "<td style=\"border:1px solid black;\">" + `${key}` + "</td>";
+          }
         }
       }
+      t += "</tr>";
+      n += (i==0) ? "</tr>" : "";
     }
-  } else {
-    alert("Response DB Error" + rst);
+    h += "<table style=\"border: 1px solid black; border-collapse: collapse\">" + n + t + "</table>";
   }
+  document.getElementById("topdatazone").innerHTML = h;
 }

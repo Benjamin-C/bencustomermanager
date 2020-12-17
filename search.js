@@ -10,8 +10,8 @@ function setupSearch() {
   h += "<b><i>Wildcard use in searches</b></i><br/>";
   h += "% is added before and after search term unless<br/>[exact match] is checked";
   h += "<table style=\"border: 1px solid black; width: 100%\"><tr><td><b>Wildcards:</b></td></tr>";
-  h += "<tr><td>%</td><td>0+ characters</td><td>b%t</td><td>&gt bot, bit, boot</td></tr>";
-  h += "<tr><td>_</td><td>1 character</td><td>b_t</td><td>&gt bot, bit, bet</td></tr></table></div>";
+  h += "<tr><td>%</td><td>0+ characters</td><td>b%t</td><td>&gt bot, bit, boot, not bots</td></tr>";
+  h += "<tr><td>_</td><td>1 character</td><td>b_t</td><td>&gt bot, bit, bet, not boot</td></tr></table></div>";
   h += "</div><br/>";
   h += "<input id=\"namebox\", type=\"text\" value=\"\"></input><br/>";
   h += "<input id=\"exactmatch\", type=\"checkbox\">Exact Match</id>";
@@ -39,17 +39,14 @@ function search_setupOrders(msg) {
   search_setupPeople(msg);
 }
 
-function search_setupPeople(msg) {
+function search_setupPeople(rsp) {
+  let msg = JSON.parse(rsp);
   $('#field_select').empty();
-  var parser = new DOMParser();
-  var doc = parser.parseFromString(msg, 'text/html');
-  var table = doc.getElementById('data');
-  let num = table.rows.length;
   let firstField = true;
   fields = "";
   let hasuuid = false;
-  for(let i = 1; i < num; i++) {
-    let name = table.rows[i].cells[0].textContent;
+  for(let i = 0; i < msg.result.length; i++) {
+    let name = msg.result[i].Field;
     if(name != "uuid_bin" && name != "puuid" && name != "puuid_bin" ) {
       if(firstField) {
         firstField = false;

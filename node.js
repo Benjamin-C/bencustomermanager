@@ -19,7 +19,15 @@ var db = mysql.createConnection({
 
 var isDBConnected = false;
 
-function stringifyMySQLResponse(cmd, rsp, count, latest) {
+function stringifyMySQLResponse(cmd, rsp) {
+  if(rsp === undefined) {
+    return "Blank response";
+  }
+  let msg = {command: cmd, result: rsp};
+  return JSON.stringify(msg);
+}
+
+function stringifyMySQLResponseToTable(cmd, rsp, count, latest) {
   if(rsp === undefined) {
     return "Blank response";
   }
@@ -155,7 +163,7 @@ http.createServer(function (req, res) {
           if(!(post.action === undefined)) {
             console.log("Action: " + post.action);
             switch(post.action) { // Post requests
-            case "new": {
+            case "new": { // Will soon be removed
               if(isDBConnected && defined(post.table)) {
                 let fields = "";
                 let values = "";
