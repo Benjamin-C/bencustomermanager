@@ -15,16 +15,16 @@ function setupResultPage(rst) {
       t += "<td style=\"border:1px solid black;\"><button class=\"smallbutton\" onclick=\"setupView('" + result[i].uuid + "')\">V</button></td>";
       for (let [key, value] of Object.entries(result[i])) {
         if(`${key}` != "uuid") {
-          t += "<td style=\"border:1px solid black;\">" + `${value}` + "</td>";
+          t += "<td>" + `${value}` + "</td>";
           if(i == 0) {
-            n += "<td style=\"border:1px solid black;\">" + `${key}` + "</td>";
+            n += "<td>" + `${key}` + "</td>";
           }
         }
       }
       t += "</tr>";
       n += (i==0) ? "</tr>" : "";
     }
-    h += "<table style=\"border: 1px solid black; border-collapse: collapse\">" + n + t + "</table>";
+    h += "<table>" + n + t + "</table>";
   }
   document.getElementById("topdatazone").innerHTML = h;
 }

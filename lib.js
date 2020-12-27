@@ -20,7 +20,7 @@ function asyncSubmitForm(e, success){
   });
 }
 
-function sendRequest(request, callback) {
+function sendRequest(request, callback, arg) {
   const Http = new XMLHttpRequest();
   let url= window.location.href + 'db';
   if(!(request == null || request == "")) {
@@ -35,7 +35,7 @@ function sendRequest(request, callback) {
   Http.onreadystatechange = (e) => {
     let msg = Http.responseText;
     if(msg != lastMsg) {
-      callback(msg);
+      callback(msg, arg);
       lastMsg = msg;
     }
     // console.log(Http.responseText);

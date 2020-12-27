@@ -12,7 +12,10 @@ TODO:
  - results.js: Fix table is NULL
 
 Future:
- - Change sorting methods
+ - Change sorting methods (pickup date, contacted)
+ - Notify of new orders
+ - Export to nice formats
+ - Import from spreadsheets
 
 MySQL cheat sheet:
  - CREATE TABLE table (columname1 TYPE, columname2 TYPE2);
