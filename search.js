@@ -3,7 +3,7 @@ let fields = "";
 function setupSearch() {
   let h = "";
   h += "Customer Search<br/>";
-  h += "Search <select id=\"table_select\" class=\"hidden\" onchange=\"search_onSelect()\">";
+  h += "Search <select id=\"table_select\" onchange=\"search_onSelect()\">";
   h += "<option value=\"people\">People</option><option value=\"orders\">Orders</option>"
   h += "</select> by <select id=\"field_select\"></select>&nbsp";
   h += "<div class=\"dropdown\">[hover]<div class=\"dropdown-content\">";

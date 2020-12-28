@@ -1,0 +1,63 @@
+:root {
+  --st-color-text: #00A000;
+  --st-border: 0.1em solid #606060;
+  --st-border-radius: 0.3em;
+  --st-padding: .3em .3em;
+  --st-margin: .4em .4em;
+  --st-background: #000000;
+  --obj-color-background: #333333;
+  --obj-color-background-dark: #222222;
+  --obj-color-highlight-grey: #666666;
+  --obj-color-highlight-green: #3CBC8D;
+  --obj-color-text-grey: #B0B0B0;
+  --obj-color-text-black: #000000;
+}
+
+body {
+  color: var(--st-color-text);
+  background-color: var(--st-background);
+}
+
+button {
+  border: var(--st-border);
+  border-radius: var(--st-border-radius);
+  padding: var(--st-padding);
+  margin: var(--st-margin);
+  background-color: var(--obj-color-background);
+  color: var(--st-color-text);
+}
+button:hover {
+  background-color: var(--obj-color-highlight-grey);
+}
+
+
+table {
+  border: var(--st-border);
+  border-collapse: collapse;
+}
+td {
+  border: var(--st-border);
+}
+
+input {
+  background-color: var(--obj-color-highlight-green);
+  border: var(--st-border);
+  border-radius: var(--st-border-radius);
+  padding: var(--st-padding);
+  color: var(--obj-color-text-black);
+}
+input:read-only {
+  background-color: var(--obj-color-background);
+  color: var(--obj-color-text-grey);
+}
+input[type=checkbox] {
+
+}
+
+select {
+  background-color: var(--obj-color-background);
+  border: var(--st-border);
+  border-radius: var(--st-border-radius);
+  padding: var(--st-padding);
+  color: var(--obj-color-text-grey);
+}
