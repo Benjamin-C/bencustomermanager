@@ -3,13 +3,13 @@ let fields = "";
 function setupSearch() {
   let h = "";
   h += "Customer Search<br/>";
-  h += "Search <select id=\"table_select\" onchange=\"search_onSelect()\">";
+  h += "Search <select id=\"table_select\" class=\"hidden\" onchange=\"search_onSelect()\">";
   h += "<option value=\"people\">People</option><option value=\"orders\">Orders</option>"
   h += "</select> by <select id=\"field_select\"></select>&nbsp";
   h += "<div class=\"dropdown\">[hover]<div class=\"dropdown-content\">";
   h += "<b><i>Wildcard use in searches</b></i><br/>";
   h += "% is added before and after search term unless<br/>[exact match] is checked";
-  h += "<table style=\"border: 1px solid black; width: 100%\"><tr><td><b>Wildcards:</b></td></tr>";
+  h += "<table><tr><td><b>Wildcards:</b></td></tr>";
   h += "<tr><td>%</td><td>0+ characters</td><td>b%t</td><td>&gt bot, bit, boot, not bots</td></tr>";
   h += "<tr><td>_</td><td>1 character</td><td>b_t</td><td>&gt bot, bit, bet, not boot</td></tr></table></div>";
   h += "</div><br/>";

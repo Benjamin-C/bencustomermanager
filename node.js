@@ -286,6 +286,9 @@ http.createServer(function (req, res) {
             }
             default: {
               res.end("Invalid action specified");
+              for (let [key, value] of Object.entries(post)) {
+                console.log(`${key}:${value}`);
+              }
             } break;
           } // End post requests
           } else {
